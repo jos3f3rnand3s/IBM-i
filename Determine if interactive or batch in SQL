@@ -1,0 +1,17 @@
+**free
+ctl-opt option(*srcstmt) ;
+                          
+dcl-s JobType char(3) ;
+                       
+exec sql 
+   SELECT V_ACTIVE_JOB_TYPE
+     INTO :JobType
+     FROM TABLE(QSYS2.GET_JOB_INFO('*')) ;
+                                                
+if (JobType = 'INT') ;
+  dsply ('Job type = ' + JobType) ;
+else ;
+  dump(a) ;
+endif ;
+
+*inlr = *on ;
